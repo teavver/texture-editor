@@ -1,0 +1,23 @@
+{
+  "name": "texture-editor",
+  "version": "1.0.0",
+  "description": "squ3 txt editor",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teavver/texture-editor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teavver/texture-editor/issues"
+  },
+  "homepage": "https://github.com/teavver/texture-editor#readme",
+  "devDependencies": {
+    "typescript": "^4.7.3"
+  }
+}
