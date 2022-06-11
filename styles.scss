@@ -1,5 +1,19 @@
 $tile: #2c3e50;
 $tile-light: #34495e;
+$tile-lighter: #48627c;
+$img-size: 64px;
+
+@mixin squareImg(){
+    width: $img-size;
+    height: $img-size;
+}
+
+@mixin noselect(){
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
 
 body, html {
     width: 100%;
@@ -8,7 +22,7 @@ body, html {
     padding: 0;
     
 }
-#canvasCtn{
+#main-wrapper{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +30,63 @@ body, html {
     height: 100%;
     background-color: #1e272e;
 }
+#canvasCtn{
+    margin-left: 24vw;
+    margin-right: 24vw;
+}
 #canvas{
      border:1px solid #000000;
      background-color: $tile;
 }
+#gui-left{
+    background-color: $tile;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    height: 100%;
+    // width: 12vw;
+    display: inline-flex;
+   
+}
+#gui-left-ctn{
+    background-color: $tile;
+}
+.gui-ul{
+    background-color: $tile-light;
+    border-radius: 10px;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+    height: 60vh;
+    text-decoration: none;
+    list-style: none;
+    // margin: 0 !important;
+    padding: 0 !important;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+.gui-clickable-item{
+    display: block;
+}
+.gui-img{
+    margin: 10px 8px 10px 8px;
+    background-color: $tile-lighter;
+}
+#gui-brush{
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    @include noselect();
+    @include squareImg();
+}
+#gui-eraser{
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    @include noselect();
+    @include squareImg();
+}
+

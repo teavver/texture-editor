@@ -1,7 +1,21 @@
 "use strict";
+// import gui from "./gui";
 const canvas = document.getElementById('canvas');
+const canvasDiv = document.querySelector("canvas");
 const ctx = canvas === null || canvas === void 0 ? void 0 : canvas.getContext("2d");
-// disable cursor on canvas
+canvas.height = 960;
+canvas.width = 960;
+let selectedBrush = 1;
+let mouseDown = 0;
+document.body.onmousedown = function (event) {
+    let mousePosition = getMousePos(event);
+    ++mouseDown;
+    console.log(mouseDown);
+};
+document.body.onmouseup = function () {
+    --mouseDown;
+    console.log(mouseDown);
+};
 // document.querySelector('canvas')!.style.cursor = "none";
 // checkerboard
 function drawTiles(ctx) {
@@ -19,21 +33,27 @@ function drawTiles(ctx) {
 }
 drawTiles(ctx);
 // mousepos + cursor 
-canvas === null || canvas === void 0 ? void 0 : canvas.addEventListener("mousemove", (event) => {
-    let mousePosition = getMousePos(event);
-    ctx === null || ctx === void 0 ? void 0 : ctx.fillRect(mousePosition.x * 32, mousePosition.y * 32, 32, 32);
-    ctx.fillStyle = "grey";
-    // ctx.clearRect(0, 0, 960, 960)
-    // ctx.fillStyle = "black" // 50% transparency hover
-    // onclick - > narysuj
-    console.log(getMousePos(event));
-});
-const canvasDiv = document.querySelector("canvas");
-let cursorInside = false;
 function getMousePos(event) {
     var rect = canvas === null || canvas === void 0 ? void 0 : canvas.getBoundingClientRect();
     return {
-        x: Math.round((event.clientX - rect.left) / 33),
-        y: Math.round((event.clientY - rect.top) / 33)
+        x: Math.round((event.clientX - rect.left) / 32.5),
+        y: Math.round((event.clientY - rect.top) / 32.5)
     };
 }
+canvas === null || canvas === void 0 ? void 0 : canvas.addEventListener("mousemove", (event) => {
+    let mousePosition = getMousePos(event);
+    // console.log(getMousePos(event));
+    // ctx.strokeRect(mousePosition.x*32,mousePosition.y*32,32,32)
+});
+canvas === null || canvas === void 0 ? void 0 : canvas.addEventListener("click", (event) => {
+    let mousePosition = getMousePos(event);
+    if (selectedBrush == 0) {
+        // console.log("erasing")
+        // ctx.fillStyle = "#34495e";
+        // ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+    }
+    if (selectedBrush == 1) {
+        // ctx.fillStyle = "rgba(255,255,255)"
+        // ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+    }
+});

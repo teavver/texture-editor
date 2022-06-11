@@ -6,12 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="styles.css">
+    <script>var exports = {};</script>
     <script defer src="/dest/script.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div id="canvasCtn" >
-        <canvas id="canvas" width="960" height="960 "></canvas>
+    <div id="main-wrapper">
+        <div id="gui-left">
+            <div id="gui-left-ctn">
+                <ul class="gui-ul">
+                    <li class="gui-list">
+                        <div class="gui-clickable-item">
+                            <img src="assets/icons/brush-icon.png" alt="" id="gui-brush" class="gui-img">
+                        </div>
+                        <div class="gui-clickable-item">
+                            <img src="assets/icons/eraser-icon.png" alt="" id="gui-eraser" class="gui-img">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="canvasCtn">
+            <canvas id="canvas" ></canvas>
+            <!-- width="960" height="960 " -->
+        </div>
+        
     </div>
 </body>
 </html>

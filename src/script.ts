@@ -1,9 +1,25 @@
+// import gui from "./gui";
+
 const canvas = document.getElementById('canvas') as HTMLCanvasElement | null;
+const canvasDiv: HTMLElement | null = document.querySelector("canvas")
 const ctx:CanvasRenderingContext2D = canvas?.getContext("2d") as CanvasRenderingContext2D;
+canvas!.height = 960
+canvas!.width = 960
 
-// disable cursor on canvas
+let selectedBrush:number = 1
+let mouseDown:number = 0;
+
+document.body.onmousedown = function(event) {
+    let mousePosition = getMousePos(event);   
+    ++mouseDown;
+    console.log(mouseDown)
+}
+document.body.onmouseup = function() {
+  --mouseDown;
+  console.log(mouseDown)
+}
+
 // document.querySelector('canvas')!.style.cursor = "none";
-
 
 
 // checkerboard
@@ -27,24 +43,32 @@ drawTiles(ctx)
 
 
 // mousepos + cursor 
-canvas?.addEventListener("mousemove", (event:MouseEvent) => {
-    let mousePosition = getMousePos(event)
-    ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32, 32 ,32)
-    ctx.fillStyle = "grey"
-    // ctx.clearRect(0, 0, 960, 960)
-    // ctx.fillStyle = "black" // 50% transparency hover
-    // onclick - > narysuj
-
-    console.log(getMousePos(event))
-  });
-
-const canvasDiv: HTMLElement | null = document.querySelector("canvas")
-let cursorInside:boolean = false;
-
 function getMousePos(event:MouseEvent) {
     var rect = canvas?.getBoundingClientRect();
     return {
-      x: Math.round((event.clientX - rect!.left) / 33 ) ,
-      y: Math.round((event.clientY - rect!.top) / 33)
+      x: Math.round((event.clientX - rect!.left) / 32.5 ) ,
+      y: Math.round((event.clientY - rect!.top) / 32.5)
+      
     };
+    
+    
 }
+
+canvas?.addEventListener("mousemove", (event:MouseEvent) => {
+    let mousePosition = getMousePos(event);
+    // console.log(getMousePos(event));
+    // ctx.strokeRect(mousePosition.x*32,mousePosition.y*32,32,32)
+  });
+
+  canvas?.addEventListener("click", (event:MouseEvent) => {
+    let mousePosition = getMousePos(event);
+    if(selectedBrush == 0) {
+        // console.log("erasing")
+        // ctx.fillStyle = "#34495e";
+        // ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+    }
+    if(selectedBrush == 1) {
+        // ctx.fillStyle = "rgba(255,255,255)"
+        // ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+    }    
+  });
