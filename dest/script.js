@@ -6,14 +6,22 @@ const ctx = canvas === null || canvas === void 0 ? void 0 : canvas.getContext("2
 canvas.height = 960;
 canvas.width = 960;
 let selectedBrush = 1;
-let mouseDown = 0;
+let mouseDown = false;
 document.body.onmousedown = function (event) {
     let mousePosition = getMousePos(event);
-    ++mouseDown;
+    mouseDown = true;
     console.log(mouseDown);
+    canvas === null || canvas === void 0 ? void 0 : canvas.addEventListener('mousemove', (event) => {
+        if (mouseDown == true) {
+            let mousePosition = getMousePos(event);
+            console.log(mousePosition);
+            ctx.fillStyle = "rgba(255,255,255)";
+            ctx === null || ctx === void 0 ? void 0 : ctx.fillRect(mousePosition.x * 32, mousePosition.y * 32, 32, 32);
+        }
+    });
 };
 document.body.onmouseup = function () {
-    --mouseDown;
+    mouseDown = false;
     console.log(mouseDown);
 };
 // document.querySelector('canvas')!.style.cursor = "none";
@@ -49,11 +57,11 @@ canvas === null || canvas === void 0 ? void 0 : canvas.addEventListener("click",
     let mousePosition = getMousePos(event);
     if (selectedBrush == 0) {
         // console.log("erasing")
-        // ctx.fillStyle = "#34495e";
-        // ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+        ctx.fillStyle = "#34495e";
+        ctx === null || ctx === void 0 ? void 0 : ctx.fillRect(mousePosition.x * 32, mousePosition.y * 32, 32, 32);
     }
     if (selectedBrush == 1) {
-        // ctx.fillStyle = "rgba(255,255,255)"
-        // ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+        ctx.fillStyle = "rgba(255,255,255)";
+        ctx === null || ctx === void 0 ? void 0 : ctx.fillRect(mousePosition.x * 32, mousePosition.y * 32, 32, 32);
     }
 });

@@ -7,15 +7,26 @@ canvas!.height = 960
 canvas!.width = 960
 
 let selectedBrush:number = 1
-let mouseDown:number = 0;
+let mouseDown:boolean = false;
 
 document.body.onmousedown = function(event) {
     let mousePosition = getMousePos(event);   
-    ++mouseDown;
+    mouseDown = true;
     console.log(mouseDown)
+
+    canvas?.addEventListener('mousemove', (event) => {
+        if(mouseDown == true){
+            let mousePosition = getMousePos(event); 
+            console.log(mousePosition)
+            ctx.fillStyle = "rgba(255,255,255)"
+            ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+        }
+    })
 }
+
+
 document.body.onmouseup = function() {
-  --mouseDown;
+  mouseDown = false;
   console.log(mouseDown)
 }
 
@@ -48,7 +59,6 @@ function getMousePos(event:MouseEvent) {
     return {
       x: Math.round((event.clientX - rect!.left) / 32.5 ) ,
       y: Math.round((event.clientY - rect!.top) / 32.5)
-      
     };
     
     
@@ -64,11 +74,11 @@ canvas?.addEventListener("mousemove", (event:MouseEvent) => {
     let mousePosition = getMousePos(event);
     if(selectedBrush == 0) {
         // console.log("erasing")
-        // ctx.fillStyle = "#34495e";
-        // ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+        ctx.fillStyle = "#34495e";
+        ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
     }
     if(selectedBrush == 1) {
-        // ctx.fillStyle = "rgba(255,255,255)"
-        // ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
+        ctx.fillStyle = "rgba(255,255,255)"
+        ctx?.fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
     }    
   });
