@@ -4,7 +4,7 @@
   "description": "squ3 txt editor",
   "main": "index.js",
   "scripts": {
-    "start": "tsc --watch"
+    "dev": "parcel ./src/index.html"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "url": "https://github.com/teavver/texture-editor/issues"
   },
   "homepage": "https://github.com/teavver/texture-editor#readme",
-  "devDependencies": {
-    "typescript": "^4.7.3"
+  "dependencies": {
+    "parcel": "^2.6.0"
   }
 }
