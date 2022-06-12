@@ -1,30 +1,12 @@
-export default class BackgroundLayer {
+import Layer from "./Layer";
 
-    canvas:HTMLCanvasElement;
-    ctx:CanvasRenderingContext2D; 
-    // ^  graficzna reprezentacja canvasu (na nim rysownaie)
-    domCtx:CanvasRenderingContext2D;
-    tileSize:number = 32;
+export default class BackgroundLayer extends Layer{
 
     constructor(_domCtx:CanvasRenderingContext2D){
-    
-        this.domCtx = _domCtx
+        super(_domCtx)
 
-
-        this.createLayer()
-        this.drawTiles();
-        this.domCtx.drawImage(this.canvas, 0, 0)
-    }
-
-
-    private createLayer(){
-        let canvas:HTMLCanvasElement = document.createElement('canvas')
-        canvas.width = 960
-        canvas.height = 960
-        let ctx:CanvasRenderingContext2D = canvas.getContext('2d') as CanvasRenderingContext2D
-    
-        this.canvas = canvas
-        this.ctx = ctx
+        this.drawTiles()
+        this.drawOnDomCanvas()
     }
 
     private drawTiles(){
