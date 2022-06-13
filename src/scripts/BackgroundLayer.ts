@@ -2,11 +2,9 @@ import Layer from "./Layer";
 
 export default class BackgroundLayer extends Layer{
 
-    constructor(_domCtx:CanvasRenderingContext2D){
-        super(_domCtx)
-
+    constructor(){
+        super()
         this.drawTiles()
-        this.drawOnDomCanvas()
     }
 
     private drawTiles(){

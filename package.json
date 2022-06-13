@@ -2,7 +2,6 @@
   "name": "texture-editor",
   "version": "1.0.0",
   "description": "squ3 txt editor",
-  "main": "index.js",
   "scripts": {
     "dev": "parcel ./src/index.html"
   },

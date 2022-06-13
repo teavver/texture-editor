@@ -3,18 +3,20 @@ export default class Layer {
     protected canvas:HTMLCanvasElement;
     protected ctx:CanvasRenderingContext2D; 
     // ^  graficzna reprezentacja canvasu (na nim rysownaie)
-    protected domCtx:CanvasRenderingContext2D;
     protected tileSize:number = 32;
 
-    constructor(_domCtx:CanvasRenderingContext2D){
-        this.domCtx = _domCtx
+    constructor(){
         this.createLayer()
     }
-
-    public drawOnDomCanvas():void{
-        this.domCtx.drawImage(this.canvas, 0, 0)
+ 
+    public getCtx():CanvasRenderingContext2D{
+        return this.ctx
     }
 
+    public getCanvas():HTMLCanvasElement{
+        return this.canvas
+    }
+    
     public clear():void{
         this.ctx.clearRect(0, 0, 960, 960)
     }
