@@ -19,5 +19,8 @@
   "homepage": "https://github.com/teavver/texture-editor#readme",
   "dependencies": {
     "parcel": "^2.6.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.6.0"
   }
 }
