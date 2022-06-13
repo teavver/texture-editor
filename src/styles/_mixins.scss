@@ -1,0 +1,19 @@
+@mixin squareImg(){
+    width: $img-size;
+    height: $img-size;
+}
+
+@mixin noselect(){
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+@mixin flex-center(){
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+@mixin max-width(){
+    max-width: 12vw;
+}

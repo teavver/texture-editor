@@ -1,5 +1,8 @@
 import BackgroundLayer from "./BackgroundLayer";
 import DrawingLayer from "./DrawingLayer";
+import MouseLayer from "./MouseLayer";
+import {getMousePos} from "./utils"
+
 
 let mouseDown:boolean = false;
 let selectedBrush:number = 1;
@@ -11,28 +14,29 @@ canvas!.height = 960
 canvas!.width = 960
 const backgroundLayer = new BackgroundLayer()
 const drawingLayer = new DrawingLayer()
+const mouseLayer = new MouseLayer()
 
 function updateLayers():void{
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.drawImage(backgroundLayer.getCanvas(), 0, 0)
     ctx.drawImage(drawingLayer.getCanvas(), 0, 0)
+    ctx.drawImage(mouseLayer.getCanvas(),0,0)
 }
-
 updateLayers()
-
-
-// mousepos + cursor
-
-function getMousePos(event:MouseEvent):{x:number, y:number}{
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: Math.round((event.clientX - rect!.left) / 32) ,
-        y: Math.round((event.clientY - rect!.top) / 32)
-    };
-}
+changeCursor()
 
 function changeBrush(_id:number){
     selectedBrush = _id
+}
+
+function changeCursor(): void{
+    mouseLayer.getCtx().fillStyle = "rgba(0,0,0,0.4)"
+    document.addEventListener("mousemove", (event:MouseEvent) => {
+        let mousePosition = getMousePos(event,this.canvas);
+        mouseLayer.clear()
+        mouseLayer.getCtx().fillRect(mousePosition.x*32,mousePosition.y*32,32,32)
+        updateLayers()
+    })
 }
 
  document.addEventListener("mousedown", (event:MouseEvent) => {
@@ -41,7 +45,7 @@ function changeBrush(_id:number){
 
         document.addEventListener("mousemove", (event:MouseEvent) => {
 
-            let mousePosition = getMousePos(event);
+            let mousePosition = getMousePos(event, canvas);
 
             if(mouseDown == true){
                 if(selectedBrush == 0){
@@ -58,7 +62,6 @@ function changeBrush(_id:number){
 
             }
         })
-
         document.addEventListener("mouseup", (event:MouseEvent) => {
             mouseDown = false
         })
@@ -66,14 +69,15 @@ function changeBrush(_id:number){
     })
 
     canvas.addEventListener("click", (event:MouseEvent) => {
-    let mousePosition = getMousePos(event);
+    drawingLayer.getCtx().fillStyle = "#FFFFFF"
+    let mousePosition = getMousePos(event, canvas);
     if(selectedBrush == 0) {
         drawingLayer.getCtx().clearRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
     }
     if(selectedBrush == 1) {
-        // ctx.fillStyle = "rgba(255,255,255)"
         drawingLayer.getCtx().fillRect(mousePosition.x * 32, mousePosition.y * 32,32,32)
     }    
+    updateLayers()
     });
 
 
